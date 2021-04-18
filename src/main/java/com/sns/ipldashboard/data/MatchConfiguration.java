@@ -35,7 +35,7 @@ public class MatchConfiguration {
     public StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
+    public Job importMatchJob(JobCompletionNotificationListener listener, Step step1) {
         return jobBuilderFactory.get("importMatchJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
@@ -61,7 +61,7 @@ public class MatchConfiguration {
                 .resource(new ClassPathResource("match-data.csv"))
                 .delimited()
                 .names(FIELD_NAMES)
-                .fieldSetMapper(new BeanWrapperFieldSetMapper<MatchInput>() {{
+                .fieldSetMapper(new BeanWrapperFieldSetMapper<>() {{
                     setTargetType(MatchInput.class);
                 }})
                 .build();
